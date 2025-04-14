@@ -1,21 +1,17 @@
-import React, {useState} from 'react';
+//import React, {useState} from 'react';
+import './App.css'; 
+import Exercise1 from './Components/Exercise1'
+import Exercise2 from './Components/Exercise2'
 
 function App() {
-  const [counter, setCounter] = useState(0);
-
-  function incrementCounter() {
-    setCounter(counter + 1)
-  }
-
-  function resetCounter() {
-    setCounter(0)
-  }
-
   return (
-    <div>
-      <p>Value: {counter}</p>
-      <button onClick={incrementCounter}>Increase</button>
-      <button onClick={resetCounter}>Reset</button>
+    <div className="container">
+      <div className="exercise1">
+        <Exercise1/>
+      </div>
+      <div className="exercise2">
+        <Exercise2/>
+      </div>
     </div>
   )
 }
