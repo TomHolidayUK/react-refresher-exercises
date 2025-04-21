@@ -5,13 +5,13 @@ export default function Exercise3() {
   const [colour, setColour] = useState("");
 
   return (
-    <div style={{ backgroundColor: colour, height: "100vh" }}>
+    <div style={{ backgroundColor: colour }}>
       <h2>Exercise 3: Choose background colour</h2>
-      <button onClick={() => setColour("")}>Reset background colour</button>
       <ChromePicker
         color={colour}
         onChange={(updated) => setColour(updated.hex)}
       />
+      <button onClick={() => setColour("")}>Reset background colour</button>
     </div>
   );
 }
