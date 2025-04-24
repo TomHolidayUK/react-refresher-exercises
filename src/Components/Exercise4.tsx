@@ -1,20 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function Exercise4() {
-  const [enableSubmit, setEnableSubmit] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
+  const [disableSubmit, setDisableSubmit] = useState(true);
   const [successMsg, setSuccessMsg] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
 
   function updateInputs(e: React.ChangeEvent<HTMLInputElement>, input: string) {
-    //console.log(e.target.value, input);
     const userInput: string = e.target.value;
-    if (input === "email" && !userInput.includes("@")) {
-      setErrorMsg("Your email address doesn't contain a '@'");
-      setEnableSubmit(false);
+    setSuccessMsg("");
+    if (input === "email") {
+      setEmail(userInput);
+    } else if (input === "name") {
+      setName(userInput);
+    }
+  }
+
+  useEffect(() => {
+    if (!email.includes("@")) {
+      setDisableSubmit(true);
       return;
     }
 
-    //setEnableSubmit(true);
+    if (email === "" || name === "") {
+      setDisableSubmit(true);
+      return;
+    }
+
+    setDisableSubmit(false);
+  }, [email, name]);
+
+  function onSubmit() {
+    setSuccessMsg("Success");
   }
 
   return (
@@ -25,8 +42,9 @@ export default function Exercise4() {
       <input type="text" onChange={(e) => updateInputs(e, "name")} />
       <div>Email:</div>
       <input type="text" onChange={(e) => updateInputs(e, "email")} />
-      <div>{errorMsg}</div>
-      <button disabled={enableSubmit}>Submit</button>
+      <button disabled={disableSubmit} onClick={onSubmit}>
+        Submit
+      </button>
       <div>{successMsg}</div>
     </div>
   );
